@@ -21,10 +21,10 @@ Se encarga de limpiar los datos, validar algunos campos y generar un nuevo archi
 ---
 
 ##  Estructura
-input/ -> archivos originales
-output/ -> archivos procesados
-main.py -> script principal
-README.md
+- input/ -> archivos originales
+- output/ -> archivos procesados
+- main.py -> script principal
+- README.md
 
 ---
 
