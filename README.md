@@ -1,47 +1,99 @@
-# Proyecto ETL básico
+# Proyecto ETL - Clientes y Tarjetas
 
-##  Descripción
-Este proyecto consiste en un pequeño pipeline ETL en Python que procesa archivos CSV de clientes y tarjetas.
+## 🧾 Descripción
 
-Se encarga de limpiar los datos, validar algunos campos y generar un nuevo archivo con la información corregida.
+Este proyecto implementa un pipeline ETL en Python que procesa archivos CSV de clientes y tarjetas.
 
----
-
-##  Qué hace
-
-- Lee archivos CSV
-- Limpia datos (espacios, formato, etc.)
-- Valida:
-  - DNI
-  - Teléfono
-  - Correo
-- Añade columnas indicando si los datos son correctos o no
-- Genera un CSV limpio en la carpeta `output/`
+El sistema detecta automáticamente los archivos correctos, limpia los datos, anonimiza información sensible y genera nuevos archivos listos para su uso o carga en base de datos.
 
 ---
 
-##  Estructura
-- input/ -> archivos originales
-- output/ -> archivos procesados
-- main.py -> script principal
-- README.md
+## ⚙️ Qué hace el programa
+
+* Detecta archivos con nombres válidos:
+
+  * `Clientes-YYYY-MM-DD.csv`
+  * `Tarjetas-YYYY-MM-DD.csv`
+* Limpia los datos:
+
+  * Elimina espacios
+  * Rellena valores nulos
+* Anonimiza datos sensibles:
+
+  * Correos (ej: m***@email.com)
+  * Tarjetas (solo muestra últimos 4 dígitos)
+* Genera archivos nuevos en `data/output/`
+* Prepara conexión a base de datos (PostgreSQL)
+* Registra información del proceso mediante logs
 
 ---
 
-##  Cómo usarlo
+## 📁 Estructura del proyecto
 
-1. Colocar los CSV en la carpeta `input/`
-2. Ejecutar: python main.py
+```
+data/
+ ┣ input/     -> archivos originales
+ ┗ output/    -> archivos procesados
 
-
-3. El resultado se genera en `output/`
+main.py       -> script principal
+requirements.txt -> dependencias del proyecto
+README.md
+```
 
 ---
 
-##  Estado
+## ▶️ Cómo usarlo
 
-En desarrollo.  
-Por ahora está implementada la limpieza y validación de datos.
+1. Instalar dependencias:
+
+```
+pip install -r requirements.txt
+```
+
+2. Colocar los archivos CSV en:
+
+```
+data/input/
+```
+
+3. Ejecutar el script:
+
+```
+python main.py
+```
+
+4. Los archivos procesados se guardan en:
+
+```
+data/output/
+```
+
+---
+
+## 📌 Reglas de los archivos
+
+* Formato: CSV separado por `;`
+* Codificación: UTF-8
+* Nombres obligatorios:
+
+  * Clientes-YYYY-MM-DD.csv
+  * Tarjetas-YYYY-MM-DD.csv
+* Archivos incorrectos se ignoran
+
+---
+
+## 🔐 Tratamiento de datos
+
+* Correos parcialmente ocultos
+* Tarjetas enmascaradas (solo últimos 4 dígitos)
+* No se almacenan datos sensibles completos
+
+---
+
+## 📊 Estado del proyecto
+
+En desarrollo.
+Actualmente implementada la limpieza, anonimización y generación de archivos.
 
 ---
 
